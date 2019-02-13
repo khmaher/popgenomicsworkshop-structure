@@ -186,39 +186,73 @@ distruct
 
 type: `ls` to check that the ‘K2TG.ps’ file has been created. Then go on to create two further plots for K=3 and K=4. To generate plots for three and four clusters we will modify the ‘drawparams’ file.
 
-
-
-
-
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
 ```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+nano drawparams
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Change every K2 to K3 and change the K-parameter on the line that starts ‘#define K’, save as the same name and re-run distruct. Repeat this for K=4.
 
-### Jekyll Themes
+You should now have three plots. If you are using an interactive session (with qsh) you can open this in the gv viewer:
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/khmaher/popgenomicsworkshop-structure/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+```markdown
+gv K2TG.ps
+```
 
-### Support or Contact
+Alternatively you can convert these files to pdf and email them to yourself to view:
 
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+```markdown
+ps2pdf K2TG.ps
+echo "Text body" | mail -s "Subject: K2 Structure plot" -a K2TG.pdf your@email
+```
+
+## 2. Run NGSADMIX using genotype likelihoods
+
+NGSadmix uses genotype likelihood information rather than absolute genotype calls. Genotype likelihood information is often output with the genotype in a vcf file as either ‘GL’ = Genotype Likelihood, or ‘PL’ = phred-scaled genotype likelihoods. The input file for NGSAdmix should be in beagle format. For this exercise that has been generated using vcftools with the following command:
+`vcftools  --vcf variants_2000.vcf --out TG2000 --BEAGLE-PL --chr pseudoscaff_000010`
+
+This generates a file of genotype likelihood values for each SNP for each sample, named `‘TG2000.BEAGLE.PL’`. The command lines to run NGSadmix for K=2, K=3 and K=4 are in the script ‘NGSa.sh’. To visualise this:
+
+```markdown
+less NGSa.sh
+```
+
+The settings are similar to those for the structure submission scripts, although for the purpose of this exercise we will run each value of K only once. Press `‘q’` to return to the command prompt, then submit the job to run:
+
+```markdown
+qsub NGSa.sh
+```
+
+The job should complete quite quickly after it has started to run and we will use the .qopt files, plus the supplied pop.info file, for visualising the results. The R commands for generating the plots are in the file `‘plots.R’`, which you can view in the usual way with ‘less’ before opening R.
+
+Start R:
+
+```markdown
+R
+```
+
+Within R:
+
+```markdown
+source("plots.R")
+q()
+```
+
+You can email the pdf file to yourself to open it 
+
+```markdown
+echo "Text body" | mail -s "Subject: NGSAdmix plot" -a Rplots.pdf your@email
+```
+
+Alternative if you are using an interactive (qsh) session: 
+
+```markdown
+echo gv Rplots.pdf
+```
+
+**Software used**
+
+[STRUCTURE](https://web.stanford.edu/group/pritchardlab/structure.html)
+
+[DISTRUCT](https://web.stanford.edu/group/rosenberglab/distruct.html)
+
+[NGSADMIX](http://popgen.dk/software/index.php/NgsAdmix)
