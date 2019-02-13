@@ -1,6 +1,6 @@
 # Population Genetic Structure Analysis
 
-_Written by Helen Hipperson – NERC Biomolecular Analysis Facility, Sheffield_
+**Written by Helen Hipperson – NERC Biomolecular Analysis Facility, Sheffield**
 
 This exercise uses data from two host-specialist species of ladybirds from Japan that are morphologically very similar: N=Henosepilachna niponica, a specialist on thistle (Cirsium sp, Asteraceae) and Y= H. yasutomii, a specialist on blue cohosh (Caulophyllum robustum, Berberiaceae). These data are generated from samples taken where the species’ ranges overlap, one separate population of each and one of each where they occur together.
 
@@ -23,7 +23,7 @@ Log into iceberg. In order to access the data & software for the analysis you ne
 qsh 
 ```
 
-You will be logged in to your home directory, ‘/home/USERNAME/’ where ‘USERNAME’ represents your University of Sheffield or guest account username, e.g. cs4abxx. We will navigate through directories using the command ‘cd’ (change directory). To check which directory you are in you can use the command to print the working directory type:
+You will be logged in to your home directory, `‘/home/USERNAME/’` where `‘USERNAME’` represents your University of Sheffield or guest account username, e.g. cs4abxx. We will navigate through directories using the command `‘cd’` (change directory). To check which directory you are in you can use the command to print the working directory type:
 
 ```markdown
 pwd
@@ -32,6 +32,7 @@ pwd
 ## 1. Run STRUCTURE on Computing Cluster as array job
 
 STRUCTURE can be run with population genomic data, although the runs can take time especially if 
+
 a) models with large K are tested
 
 b) many individuals were sampled
@@ -57,7 +58,7 @@ cp –r /usr/local/extras/Genomics/workshops/February2019/Structure/* ./
 
 In this part you will start some dummy runs (with very few generations) to learn how to use a job submission script. Runs with sufficient number of generations (>100k would take unfortunately about 24 hours). The structure input file has been created from a vcf file of 2000 loci using PGDSpider. The runs with real results will be in the folder 'runs'.
 
-Look at the “mainparams” file first - this contains the necessary specifications of the STRUCTURE model run (see also manual for more details).
+Look at the `'mainparams'` file first - this contains the necessary specifications of the STRUCTURE model run (see also manual for more details).
 
 ```markdown
 less mainparams
@@ -67,13 +68,9 @@ less mainparams
 - How many markers?
 - What are burn-in and run lengths?
 
-```markdown
-q
-```
+Press `‘q’` to return to the command prompt.
 
-This returns you to the command prompt
-
-The “.sh” file is a small script used to submit a job to the cluster. Submitted jobs will run remotely and leave your worker node available for other tasks, they will not necessarily start immediately. Parallel jobs or an array of jobs have to be submitted to the queue, this is how we will run STRUCTURE. To look at the submission job file:
+The `'.sh'` file is a small script used to submit a job to the cluster. Submitted jobs will run remotely and leave your worker node available for other tasks, they will not necessarily start immediately. Parallel jobs or an array of jobs have to be submitted to the queue, this is how we will run STRUCTURE. To look at the submission job file:
 
 ```markdown
 less TGK2.sh
@@ -112,12 +109,8 @@ structure -K 2 -i TG_variants_str_2000 -o /home/$USER/Structure/K2_$SGE_TASK_ID 
 
 ```
 
-To return to the command prompt press:
-```markdown
-q
-```
+Press `‘q’` to return to the command prompt. To submit the job use `qsub`:
 
-To submit the job use qsub:
 ```markdown
 qsub TGK2.sh
 Qstat 
@@ -135,7 +128,7 @@ sed 's/K2/K4/g' TGK2.sh > TGK4.sh
 sed –i 's/K 2/K 4/g' TGK4.sh
 ```
 
-Open the .sh files to check what changes have been made before continuing, then submit each `.sh` file to the queue:
+Open the `.sh` files to check what changes have been made before continuing, then submit each `.sh` file to the queue:
 
 ```markdown
 qsub TGK3.sh
@@ -184,13 +177,13 @@ For plotting two clusters there are specific settings to point the software to t
 distruct
 ```
 
-type: `ls` to check that the ‘K2TG.ps’ file has been created. Then go on to create two further plots for K=3 and K=4. To generate plots for three and four clusters we will modify the ‘drawparams’ file.
+type: `ls` to check that the `K2TG.ps` file has been created. Then go on to create two further plots for K=3 and K=4. To generate plots for three and four clusters we will modify the `drawparams` file.
 
 ```markdown
 nano drawparams
 ```
 
-Change every K2 to K3 and change the K-parameter on the line that starts ‘#define K’, save as the same name and re-run distruct. Repeat this for K=4.
+Change every K2 to K3 and change the K-parameter on the line that starts `‘#define K’`, save as the same name and re-run distruct. Repeat this for K=4.
 
 You should now have three plots. If you are using an interactive session (with qsh) you can open this in the gv viewer:
 
@@ -210,7 +203,7 @@ echo "Text body" | mail -s "Subject: K2 Structure plot" -a K2TG.pdf your@email
 NGSadmix uses genotype likelihood information rather than absolute genotype calls. Genotype likelihood information is often output with the genotype in a vcf file as either ‘GL’ = Genotype Likelihood, or ‘PL’ = phred-scaled genotype likelihoods. The input file for NGSAdmix should be in beagle format. For this exercise that has been generated using vcftools with the following command:
 `vcftools  --vcf variants_2000.vcf --out TG2000 --BEAGLE-PL --chr pseudoscaff_000010`
 
-This generates a file of genotype likelihood values for each SNP for each sample, named `‘TG2000.BEAGLE.PL’`. The command lines to run NGSadmix for K=2, K=3 and K=4 are in the script ‘NGSa.sh’. To visualise this:
+This generates a file of genotype likelihood values for each SNP for each sample, named `TG2000.BEAGLE.PL`. The command lines to run NGSadmix for K=2, K=3 and K=4 are in the script ‘NGSa.sh’. To visualise this:
 
 ```markdown
 less NGSa.sh
@@ -222,7 +215,7 @@ The settings are similar to those for the structure submission scripts, although
 qsub NGSa.sh
 ```
 
-The job should complete quite quickly after it has started to run and we will use the .qopt files, plus the supplied pop.info file, for visualising the results. The R commands for generating the plots are in the file `‘plots.R’`, which you can view in the usual way with ‘less’ before opening R.
+The job should complete quite quickly after it has started to run and we will use the .qopt files, plus the supplied pop.info file, for visualising the results. The R commands for generating the plots are in the file `plots.R`, which you can view in the usual way with `‘less’` before opening R.
 
 Start R:
 
