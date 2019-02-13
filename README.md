@@ -50,7 +50,7 @@ mkdir Structure
 cd Structure
 ```
 
-Copy the data and analysis scripts are saved from the shared directory, type:
+To copy the data and analysis scripts from the shared directory, type:
 
 ```markdown
 cp –r /usr/local/extras/Genomics/workshops/February2019/Structure/* ./
