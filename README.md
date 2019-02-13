@@ -1,7 +1,5 @@
 # Population Genetic Structure Analysis
 
-**Written by Helen Hipperson – NERC Biomolecular Analysis Facility, Sheffield**
-
 This exercise uses data from two host-specialist species of ladybirds from Japan that are morphologically very similar: N=Henosepilachna niponica, a specialist on thistle (Cirsium sp, Asteraceae) and Y= H. yasutomii, a specialist on blue cohosh (Caulophyllum robustum, Berberiaceae). These data are generated from samples taken where the species’ ranges overlap, one separate population of each and one of each where they occur together.
 
 ddRAD data were generated and here we will use a subset of the full data set (2,000 loci in 20 individuals, 5 from each population) to investigate if there is hybridisation in sympatry.
