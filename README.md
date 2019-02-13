@@ -23,7 +23,7 @@ Log into iceberg. In order to access the data & software for the analysis you ne
 qsh 
 ```
 
-You will be logged in to your home directory, `‘/home/USERNAME/’` where `‘USERNAME’` represents your University of Sheffield or guest account username, e.g. cs4abxx. We will navigate through directories using the command `‘cd’` (change directory). To check which directory you are in you can use the command to print the working directory type:
+You will be logged in to your home directory, `/home/USERNAME/` where `USERNAME` represents your University of Sheffield or guest account username, e.g. cs4abxx. We will navigate through directories using the command `‘cd’` (change directory). To check which directory you are in you can use the command to print the working directory type:
 
 ```markdown
 pwd
@@ -58,7 +58,7 @@ cp –r /usr/local/extras/Genomics/workshops/February2019/Structure/* ./
 
 In this part you will start some dummy runs (with very few generations) to learn how to use a job submission script. Runs with sufficient number of generations (>100k would take unfortunately about 24 hours). The structure input file has been created from a vcf file of 2000 loci using PGDSpider. The runs with real results will be in the folder 'runs'.
 
-Look at the `'mainparams'` file first - this contains the necessary specifications of the STRUCTURE model run (see also manual for more details).
+Look at the `mainparams` file first - this contains the necessary specifications of the STRUCTURE model run (see also manual for more details).
 
 ```markdown
 less mainparams
@@ -70,7 +70,7 @@ less mainparams
 
 Press `‘q’` to return to the command prompt.
 
-The `'.sh'` file is a small script used to submit a job to the cluster. Submitted jobs will run remotely and leave your worker node available for other tasks, they will not necessarily start immediately. Parallel jobs or an array of jobs have to be submitted to the queue, this is how we will run STRUCTURE. To look at the submission job file:
+The `.sh` file is a small script used to submit a job to the cluster. Submitted jobs will run remotely and leave your worker node available for other tasks, they will not necessarily start immediately. Parallel jobs or an array of jobs have to be submitted to the queue, this is how we will run STRUCTURE. To look at the submission job file:
 
 ```markdown
 less TGK2.sh
@@ -116,7 +116,7 @@ qsub TGK2.sh
 Qstat 
 ```
 
-Check for the status of all your jobs (qw = waiting, r = running). 'QRLOGIN' is the status of the worker node that you are working on. `Qstat` provides the time & date when job was submitted. If the job is not showing up anymore it is finished (or has failed). You should see three lines for job 'TGK2' one for each run within the array when the job is running. Successful jobs will create a `‘_f’` file with results and a `‘runseqK’` file that contains the usual screen output of STRUCTURE and can be useful to track the progress of a run. `TGK2.oXXX` and `TGK2.eXXXX` files are other output or error files although they should remain empty.
+Check for the status of all your jobs (qw = waiting, r = running). 'QRLOGIN' is the status of the worker node that you are working on. `Qstat` provides the time & date when job was submitted. If the job is not showing up anymore it is finished (or has failed). You should see three lines for job 'TGK2' one for each run within the array when the job is running. Successful jobs will create a `_f` file with results and a `runseqK` file that contains the usual screen output of STRUCTURE and can be useful to track the progress of a run. `TGK2.oXXX` and `TGK2.eXXXX` files are other output or error files although they should remain empty.
 
 We can use the first script as a template to prepare .sh files for other values of K using the sed ‘find and replace command’ – finding ‘K2’ (or ‘K 2’) and replacing it with ‘K3’ (or ‘K 3’).
 
@@ -177,13 +177,13 @@ For plotting two clusters there are specific settings to point the software to t
 distruct
 ```
 
-type: `ls` to check that the `K2TG.ps` file has been created. Then go on to create two further plots for K=3 and K=4. To generate plots for three and four clusters we will modify the `drawparams` file.
+type: `'ls'` to check that the `K2TG.ps` file has been created. Then go on to create two further plots for K=3 and K=4. To generate plots for three and four clusters we will modify the `drawparams` file.
 
 ```markdown
 nano drawparams
 ```
 
-Change every K2 to K3 and change the K-parameter on the line that starts `‘#define K’`, save as the same name and re-run distruct. Repeat this for K=4.
+Change every K2 to K3 and change the K-parameter on the line that starts `#define K`, save as the same name and re-run distruct. Repeat this for K=4.
 
 You should now have three plots. If you are using an interactive session (with qsh) you can open this in the gv viewer:
 
