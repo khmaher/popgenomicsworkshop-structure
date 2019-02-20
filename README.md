@@ -9,7 +9,7 @@ We will evaluate population genetic structure using two methods:
 2.	Running a Maximum-likelihood model based on genotype likelihoods in the program NGSADMIX.
 
 
-For the analysis we will connect to Sheffield University’s high performance computing server, known as iceberg, through a [web browser](https://www.sheffield.ac.uk/wrgrid/using/access). The software we will use is installed on the server, and we will interact with it through the command line interface. Command-lines to be typed are indicated throughout the protocol are coded in Markdown, e.g. to navigate to your home directory type:
+For the analysis we will connect to Sheffield University’s high performance computing server, known as iceberg, through a [web browser](https://myapps.shef.ac.uk/sgd/index.jsp?langSelected=en). The software we will use is installed on the server, and we will interact with it through the command line interface. Command-lines to be typed are indicated throughout the protocol are coded in Markdown, e.g. to navigate to your home directory type:
 
 ```markdown
 cd
